@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Script that returns 'to-do list' info for a given employee ID """
+""" Script that exports data in the CSV format """
 
 import csv
 import requests
@@ -16,7 +16,7 @@ if __name__ == "__main__":
     todo_list = requests.get("{}todos?userId={}".format(api_url,
                                                         employee_id)).json()
 
-    with open("{}.csv".format(employee_id), mode='w') as csv_file:
+    with open("{}.csv".format(employee_id), "w") as csv_file:
         writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
 
         for task in todo_list:
