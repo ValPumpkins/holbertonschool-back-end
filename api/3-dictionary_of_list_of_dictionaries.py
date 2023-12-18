@@ -13,12 +13,23 @@ if __name__ == "__main__":
 
     todos_list = requests.get("{}todos".format(API_URL)).json()
 
+    all_employees_data = {}
+
+    for employee in employees:
+        user_id = employee.get("id")
+        username = employee.get("username")
+
+        employee_tasks = [
+            {
+                "username": username,
+                "task": task["title"],
+                "completed": task["completed"],
+            }
+            for task in todos_list if task["userId"] == user_id
+        ]
+        all_employees_data[user_id] = employee_tasks
+
     json_file = "todo_all_employees.json"
 
     with open(json_file, "w") as json_file:
-        json.dump({employees.get("id"): [{
-            "username": employees.get("username"),
-            "task": tasks.get("title"),
-            "completed": tasks.get("completed"),
-        } for tasks in todos_list]
-                   for employees in employees}, json_file)
+        json.dump(all_employees_data, json_file)
