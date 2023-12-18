@@ -5,15 +5,15 @@ import csv
 import requests
 import sys
 
-api_url = "https://jsonplaceholder.typicode.com/"
+API_URL = "https://jsonplaceholder.typicode.com/"
 
 if __name__ == "__main__":
 
     employee_id = sys.argv[1]
 
-    employee = requests.get(api_url + "users/{}".format(employee_id)).json()
+    employee = requests.get(API_URL + "users/{}".format(employee_id)).json()
 
-    todo_list = requests.get("{}todos?userId={}".format(api_url,
+    todo_list = requests.get("{}todos?userId={}".format(API_URL,
                                                         employee_id)).json()
 
     with open("{}.csv".format(employee_id), "w") as csv_file:

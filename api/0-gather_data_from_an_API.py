@@ -4,7 +4,7 @@
 import requests
 import sys
 
-api_url = "https://jsonplaceholder.typicode.com/"
+API_URL = "https://jsonplaceholder.typicode.com/"
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
@@ -13,9 +13,9 @@ if __name__ == "__main__":
 
     id = sys.argv[1]
 
-    employee = requests.get(api_url + "users/{}".format(id)).json()
+    employee = requests.get(API_URL + "users/{}".format(id)).json()
 
-    todo_list = requests.get("{}todos?userId={}".format(api_url, id)).json()
+    todo_list = requests.get("{}todos?userId={}".format(API_URL, id)).json()
 
     completed_tasks = [task.get("title")
                        for task in todo_list if task.get("completed") is True]
