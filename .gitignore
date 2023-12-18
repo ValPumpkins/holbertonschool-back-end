@@ -3,3 +3,4 @@
 
 # Tests Files
 api/*.csv
+api/*.json
